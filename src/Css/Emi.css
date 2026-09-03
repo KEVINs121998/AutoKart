@@ -1,0 +1,130 @@
+.emi-card,
+.result-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 20px;
+  background-color: #fff;
+  height: 100%;
+}
+
+/* Headings */
+.emi-card h3,
+.result-card h3 {
+  font-size: 20px;
+}
+
+/* Labels */
+.form-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Inputs */
+.emi-card .form-control,
+.emi-card .form-select,
+.emi-card .input-group-text {
+  font-size: 14px;
+  padding: 7px 10px;
+}
+
+/* Reduce spacing */
+.emi-card .mb-4 {
+  margin-bottom: 15px !important;
+}
+
+/* Button */
+.emi-card .btn {
+  font-size: 14px;
+  padding: 8px;
+}
+
+/* Result */
+.result-card {
+  background-color: #f8f9fa;
+}
+
+.result-item {
+  padding: 0;
+}
+
+.result-item p {
+  font-size: 13px;
+}
+
+.result-item h2 {
+  font-size: 25px;
+  margin: 0;
+}
+
+.result-item h4 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.result-card hr {
+  margin: 12px 0;
+}
+
+/* Summary */
+.loan-summary {
+  background-color: white;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+/* Page heading */
+.container > .text-center h1 {
+  font-size: 28px;
+}
+
+.container > .text-center p {
+  font-size: 14px;
+}
+
+/* Desktop */
+@media (min-width: 992px) {
+  .container.py-5 {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+  }
+
+  .container > .text-center.mb-5 {
+    margin-bottom: 25px !important;
+  }
+}
+
+/* Tablet */
+@media (max-width: 991px) {
+  .emi-card,
+  .result-card {
+    padding: 18px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .container.py-5 {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .container > .text-center h1 {
+    font-size: 24px;
+  }
+
+  .container > .text-center.mb-5 {
+    margin-bottom: 20px !important;
+  }
+
+  .emi-card,
+  .result-card {
+    padding: 15px;
+  }
+
+  .emi-card h3,
+  .result-card h3 {
+    font-size: 18px;
+  }
+}

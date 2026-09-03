@@ -1,0 +1,417 @@
+* {
+  box-sizing: border-box;
+}
+.register-page {
+  --ink: #171b24;
+  --muted: #6f7480;
+  --line: #dfe2e8;
+  --accent: #e63946;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(440px, 1fr);
+  overflow: hidden;
+  background: #f6f7f9;
+  color: var(--ink);
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+}
+.register-hero {
+  position: relative;
+  min-height: 100dvh;
+  isolation: isolate;
+  overflow: hidden;
+  color: #fff;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(8, 11, 18, 0.82) 0%,
+      rgba(8, 11, 18, 0.6) 46%,
+      rgba(8, 11, 18, 0.18) 100%
+    ),
+    url("https://images.pexels.com/photos/16176577/pexels-photo-16176577/free-photo-of-sports-muscle-cars-in-showroom.jpeg?cs=tinysrgb&dpr=1&w=500");
+  background-size: cover;
+  background-position: center;
+}
+.register-hero:after {
+  position: absolute;
+  z-index: -1;
+  top: -18%;
+  right: -18%;
+  width: 48%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  content: "";
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(125deg, rgba(4, 8, 15, 0.48), transparent 58%),
+    linear-gradient(0deg, rgba(4, 8, 15, 0.3), transparent 38%);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100%;
+  padding: clamp(2rem, 5vw, 4rem);
+  display: flex;
+  flex-direction: column;
+}
+.brand,
+.mobile-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.055em;
+}
+.brand-icon {
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.55rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.8rem;
+  box-shadow: 0 9px 22px rgba(230, 57, 70, 0.32);
+}
+.hero-text {
+  max-width: 34rem;
+  margin: auto 0 clamp(2rem, 5vh, 4rem);
+}
+.hero-small-title,
+.form-label-top {
+  margin: 0 0 0.85rem;
+  color: var(--accent);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+.hero-text h1 {
+  margin: 0;
+  max-width: 9ch;
+  font-size: clamp(3.4rem, 6.5vw, 5.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.075em;
+}
+.hero-text h1 span {
+  color: var(--accent);
+}
+.hero-text p:not(.hero-small-title) {
+  max-width: 27rem;
+  margin: 1.65rem 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+.hero-features {
+  display: flex;
+  gap: clamp(1.3rem, 4vw, 3.2rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+.hero-features div {
+  display: grid;
+  gap: 0.25rem;
+}
+.hero-features strong {
+  color: var(--accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+.hero-features span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.register-section {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  background: radial-gradient(circle at 95% 5%, #fff 0, #f6f7f9 42%);
+}
+.register-container {
+  width: min(100%, 31rem);
+  padding: 2rem clamp(1.5rem, 5vw, 3.5rem);
+}
+.mobile-brand {
+  display: none;
+  color: var(--ink);
+  margin-bottom: 2.4rem;
+}
+.register-header {
+  margin-bottom: 1.7rem;
+}
+.register-header h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 2.45rem);
+  line-height: 1.05;
+  letter-spacing: -0.065em;
+}
+.register-header > p:last-child {
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+.register-form {
+  display: grid;
+  gap: 0.9rem;
+}
+.form-group {
+  display: grid;
+}
+.form-group label {
+  margin-bottom: 0.48rem;
+  color: #303541;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.form-group input {
+  width: 100%;
+  height: 3rem;
+  padding: 0 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 0.7rem;
+  outline: 0;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.88rem;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.form-group input::placeholder {
+  color: #a4a9b2;
+}
+.form-group input:hover {
+  border-color: #b9bec8;
+}
+.form-group input:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 4px rgba(23, 27, 36, 0.09);
+}
+.form-group input.input-error {
+  border-color: var(--accent);
+}
+.form-group input.input-error:focus {
+  box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.12);
+}
+.error-message {
+  margin: 0.38rem 0 0;
+  color: #c72d3a;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.register-button {
+  width: 100%;
+  height: 3.15rem;
+  margin-top: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 1px solid var(--ink);
+  border-radius: 0.7rem;
+  background: var(--ink);
+  color: #fff;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 22px rgba(23, 27, 36, 0.18);
+  transition:
+    transform 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+.register-button span {
+  font-size: 1.2rem;
+  transition: transform 0.2s;
+}
+.register-button:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  box-shadow: 0 12px 25px rgba(230, 57, 70, 0.26);
+  transform: translateY(-2px);
+}
+.register-button:hover span {
+  transform: translateX(4px);
+}
+.register-button:active {
+  transform: translateY(0);
+}
+.login-text {
+  margin: 1.3rem 0 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.78rem;
+}
+.login-link {
+  margin-left: 0.28rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.login-link:hover {
+  color: #b51f2d;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.terms-text {
+  max-width: 25rem;
+  margin: 1.15rem auto 0;
+  color: #9499a3;
+  text-align: center;
+  font-size: 0.65rem;
+  line-height: 1.6;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(230, 57, 70, 0.38);
+  outline-offset: 2px;
+}
+@media (max-width: 900px) {
+  .register-page {
+    display: block;
+    overflow: visible;
+  }
+  .register-hero {
+    display: none;
+  }
+  .register-section {
+    min-height: 100dvh;
+    align-items: start;
+  }
+  .register-container {
+    margin: auto;
+    padding-top: clamp(2rem, 8vh, 4.5rem);
+    padding-bottom: 2rem;
+  }
+  .mobile-brand {
+    display: inline-flex;
+  }
+}
+@media (max-width: 420px) {
+  .register-container {
+    padding-inline: 1.25rem;
+  }
+  .register-header h2 {
+    font-size: 2rem;
+  }
+  .hero-features {
+    gap: 1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+.terms-checkbox {
+  margin-top: 2px;
+}
+
+.terms-checkbox label {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+
+  cursor: pointer;
+
+  color: #777;
+
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.terms-checkbox input {
+  width: 15px;
+  height: 15px;
+
+  margin-top: 2px;
+  flex-shrink: 0;
+
+  accent-color: #171717;
+
+  cursor: pointer;
+}
+
+.terms-checkbox a {
+  color: #171717;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.terms-checkbox a:hover {
+  color: #e63946;
+}
+
+.terms-checkbox .error-message {
+  margin: 5px 0 0 24px;
+
+  color: #e63946;
+
+  font-size: 11px;
+}
+
+.form-group textarea {
+  width: 100%;
+  min-height: 80px;
+
+  padding: 12px 13px;
+
+  border: 1px solid #d9d9dc;
+  border-radius: 6px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #222;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group textarea::placeholder {
+  color: #aaa;
+}
+
+.form-group textarea:focus {
+  border-color: #222;
+
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.form-group textarea.input-error {
+  border-color: #e63946;
+}

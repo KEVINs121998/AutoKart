@@ -1,0 +1,21 @@
+.contact-form {
+  border: 1px solid #ddd;
+  padding: 30px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.contact-form .form-control {
+  padding: 10px;
+}
+
+.contact-form .form-control:focus {
+  box-shadow: none;
+  border-color: #0d6efd;
+}
+
+@media (max-width: 768px) {
+  .contact-form {
+    padding: 20px;
+  }
+}
