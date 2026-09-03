@@ -8,6 +8,7 @@ import About from "../Pages/About";
 import Cars from "../Pages/Cars";
 import Contact from "../Pages/Contact";
 import Emi from "../Pages/Emi";
+import CarDetails from "../Pages/CarDetails";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "cars", element: <Cars /> },
       { path: "contact", element: <Contact /> },
       { path: "emi", element: <Emi /> },
+      { path: "cardetails", element: <CarDetails /> },
     ],
   },
   {
