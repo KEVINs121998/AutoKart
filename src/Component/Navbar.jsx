@@ -5,7 +5,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-white">
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">AutoKart</a>
+    <a className="navbar-brand" href="/home">AutoKart</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -15,22 +15,26 @@ const Navbar = () => {
           <a className="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="cars">Cars Stock</a>
+          <a className="nav-link" href="/cars">Cars Stock</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Services</a>
+          <a className="nav-link" href="/services">Services</a>
         </li> 
 
         <li className="nav-item">
-          <a className="nav-link" href="emi">Emi Calculator</a>
-        </li>
-
-           <li className="nav-item">
-          <a className="nav-link" href="about">About Us</a>
+          <a className="nav-link" href="/emi">Emi Calculator</a>
         </li>
 
          <li className="nav-item">
-          <a className="nav-link" href="contact">Contact Us</a>
+          <a className="nav-link" href="/contact">Contact Us</a>
+        </li>
+
+                 <li className="nav-item">
+          <a className="nav-link" href="/inventory">My Inventory</a>
+        </li>
+
+         <li className="nav-item">
+          <a className="nav-link" href="/login">Logout</a>
         </li>
       
       </ul>

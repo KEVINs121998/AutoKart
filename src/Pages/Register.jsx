@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../Css/Register.css";
+import { useState } from "react";
 
 const Register = () => {
   const {
@@ -18,6 +19,10 @@ const Register = () => {
     console.log(data);
     navigate("/login");
   };
+
+  const [showPassword, setShowPassword] = useState(false);
+const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
 
   return (
     <div className="register-page">
@@ -182,49 +187,80 @@ const Register = () => {
               )}
             </div>
 
-            {/* Password */}
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
+           {/* Password */}
+<div className="form-group">
+  <label htmlFor="password">Password</label>
 
-              <input
-                type="password"
-                id="password"
-                placeholder="Create a password"
-                {...register("password", {
-                  required: "Password is required",
-                  minLength: {
-                    value: 8,
-                    message: "Use at least 8 characters",
-                  },
-                })}
-                className={errors.password ? "input-error" : ""}
-              />
+  <div className="password-wrapper">
 
-              {errors.password && (
-                <p className="error-message">{errors.password.message}</p>
-              )}
-            </div>
+    <input
+      type={showPassword ? "text" : "password"}
+      id="password"
+      placeholder="Create a password"
+      {...register("password", {
+        required: "Password is required",
+        minLength: {
+          value: 8,
+          message: "Use at least 8 characters",
+        },
+      })}
+      className={errors.password ? "input-error" : ""}
+    />
 
-            {/* Confirm Password */}
-            <div className="form-group">
-              <label htmlFor="cpassword">Confirm Password</label>
+    <button
+      type="button"
+      className="password-toggle"
+      onClick={() => setShowPassword(!showPassword)}
+    >
+      {showPassword ? "Hide" : "Show"}
+    </button>
 
-              <input
-                type="password"
-                id="cpassword"
-                placeholder="Confirm your password"
-                {...register("cpassword", {
-                  required: "Confirm Password is required",
-                  validate: (value) =>
-                    value === password || "Passwords do not match",
-                })}
-                className={errors.cpassword ? "input-error" : ""}
-              />
+  </div>
 
-              {errors.cpassword && (
-                <p className="error-message">{errors.cpassword.message}</p>
-              )}
-            </div>
+  {errors.password && (
+    <p className="error-message">
+      {errors.password.message}
+    </p>
+  )}
+</div>
+
+
+{/* Confirm Password */}
+<div className="form-group">
+  <label htmlFor="cpassword">Confirm Password</label>
+
+  <div className="password-wrapper">
+
+    <input
+      type={showConfirmPassword ? "text" : "password"}
+      id="cpassword"
+      placeholder="Confirm your password"
+      {...register("cpassword", {
+        required: "Confirm Password is required",
+        validate: (value) =>
+          value === password || "Passwords do not match",
+      })}
+      className={errors.cpassword ? "input-error" : ""}
+    />
+
+    <button
+      type="button"
+      className="password-toggle"
+      onClick={() =>
+        setShowConfirmPassword(!showConfirmPassword)
+      }
+    >
+      {showConfirmPassword ? "Hide" : "Show"}
+    </button>
+
+  </div>
+
+  {errors.cpassword && (
+    <p className="error-message">
+      {errors.cpassword.message}
+    </p>
+  )}
+</div>
 
             <div className="terms-checkbox">
 

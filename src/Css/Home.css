@@ -1,0 +1,48 @@
+.carousel-item img {
+  height: 500px;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.45);
+  padding: 25px;
+  border-radius: 10px;
+}
+
+.home-car-card {
+  transition: 0.3s ease;
+}
+
+.home-car-card:hover {
+  transform: translateY(-5px);
+}
+
+.home-car-card img {
+  transition: 0.3s ease;
+}
+
+.home-car-card:hover img {
+  transform: scale(1.03);
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .carousel-item img {
+    height: 350px;
+  }
+
+  .carousel-caption {
+    padding: 15px;
+  }
+
+  .carousel-caption h1 {
+    font-size: 24px;
+  }
+
+  .carousel-caption p {
+    font-size: 14px;
+  }
+
+}
