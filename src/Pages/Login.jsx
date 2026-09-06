@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../Css/Login.css";
-import { useState } from "react";
+import { use, useState } from "react";
+import users from "../data/users";
 
 const Login = () => {
   const {
@@ -12,8 +13,21 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  const[loginError,setLoginError]=useState("")
+
   const onSubmit = (data) => {
-    navigate("/home");
+const user=users.find((user)=>  
+user.email===data.email && user.password===data.password
+)
+if(!user){
+  setLoginError("Invalid email or password")
+  return;
+}
+setLoginError("")
+
+localStorage.setItem("loggedInUser",JSON.stringify(user))
+
+user.role==="admin"?navigate("/admin/dashboard"):navigate('/user-dashboard')
   };
 
   const [showPassword, setShowPassword] = useState(false);

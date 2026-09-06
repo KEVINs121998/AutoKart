@@ -9,26 +9,41 @@ import Cars from "../Pages/Cars";
 import Contact from "../Pages/Contact";
 import Emi from "../Pages/Emi";
 import CarDetails from "../Pages/CarDetails";
+import UserDashboard from "../Pages/UserDashboard";
+import ProtectedRoute from "../Component/ProtectedRoute";
+import AdminDashboard from "../Pages/AdminDashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <Navigate to="/login" replace /> },
-      { path: "home", element: <Home /> },
+      { index: true, element: <Home /> },
       { path: "about", element: <About /> },
       { path: "cars", element: <Cars /> },
       { path: "contact", element: <Contact /> },
       { path: "emi", element: <Emi /> },
       { path: "cardetails", element: <CarDetails /> },
+            { path: "login", element: <Login /> },
+                  { path: "register", element: <Register /> },
+
+      {
+path:"user-dashboard",
+element:<ProtectedRoute role="user">
+  <UserDashboard />
+</ProtectedRoute>
+      }
     ],
   },
   {
+    path:"/admin",
     element: <AuthLayout />,
     children: [
-      { path: "/login", element: <Login /> },
-      { path: "/register", element: <Register /> },
+      { path: "dashboard", element:
+        <ProtectedRoute role="admin">
+          <AdminDashboard /> 
+        </ProtectedRoute>
+        },
     ],
   },
 ]);
