@@ -1,12 +1,15 @@
 import { RouterProvider } from 'react-router-dom'
 import './App.css'
 import router from './Router/Router'
+import { InventoryProvider } from './Context/InventoryContext'
 
 function App() {
 
   return (
    <>
-   <RouterProvider router={router} />
+     <InventoryProvider>
+      <RouterProvider router={router} />
+    </InventoryProvider>
    </>
   )
 }

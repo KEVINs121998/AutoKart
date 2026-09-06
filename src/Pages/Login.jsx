@@ -146,7 +146,7 @@ user.role==="admin"?navigate("/admin/dashboard"):navigate('/user-dashboard')
                     className="password-toggle"
                     onClick={() => setShowPassword(!showPassword)}
                   >
-                    {showPassword ? "🙈" : "👁️"}
+                    {showPassword ? "Hide" : "Show"}
                   </button>
                 </div>
                 <button type="button" className="forgot-password">

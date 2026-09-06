@@ -4,7 +4,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Home from "../Pages/Home";
 import AuthLayout from "../Common/AuthLayout";
-import About from "../Pages/About";
+
 import Cars from "../Pages/Cars";
 import Contact from "../Pages/Contact";
 import Emi from "../Pages/Emi";

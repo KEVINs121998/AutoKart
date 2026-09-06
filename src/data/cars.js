@@ -7,8 +7,10 @@ const cars = [
     km: 32000,
     owner: "1st Owner",
     condition: "Good",
-    img: ["https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Swift/9226/1755777061785/front-left-side-47.jpg",
-        "https://imgd-ct.aeplcdn.com/664x415/n/cw/ec/159099/swift-exterior-left-front-three-quarter-33.jpeg?isig=0&q=80",
+    transmission: "Manual",
+    img: [
+      "https://stimg.cardekho.com/images/carexteriorimages/930x620/Maruti/Swift/9226/1755777061785/front-left-side-47.jpg",
+      "https://imgd-ct.aeplcdn.com/664x415/n/cw/ec/159099/swift-exterior-left-front-three-quarter-33.jpeg?isig=0&q=80"
     ]
   },
   {
@@ -19,7 +21,10 @@ const cars = [
     km: 45000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/creta.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/creta.jpg"
+    ]
   },
   {
     id: 3,
@@ -29,7 +34,10 @@ const cars = [
     km: 21000,
     owner: "1st Owner",
     condition: "Accidental",
-    img: "/images/nexon.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/nexon.jpg"
+    ]
   },
   {
     id: 4,
@@ -39,7 +47,10 @@ const cars = [
     km: 52000,
     owner: "2nd Owner",
     condition: "Good",
-    img: "/images/city.jpg"
+    transmission: "Automatic",
+    img: [
+      "/images/city.jpg"
+    ]
   },
   {
     id: 5,
@@ -49,7 +60,10 @@ const cars = [
     km: 68000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/innova.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/innova.jpg"
+    ]
   },
   {
     id: 6,
@@ -59,7 +73,10 @@ const cars = [
     km: 28000,
     owner: "1st Owner",
     condition: "Flooded",
-    img: "/images/seltos.jpg"
+    transmission: "Automatic",
+    img: [
+      "/images/seltos.jpg"
+    ]
   },
   {
     id: 7,
@@ -69,7 +86,10 @@ const cars = [
     km: 24000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/xuv700.jpg"
+    transmission: "Automatic",
+    img: [
+      "/images/xuv700.jpg"
+    ]
   },
   {
     id: 8,
@@ -79,7 +99,10 @@ const cars = [
     km: 35000,
     owner: "2nd Owner",
     condition: "Accidental",
-    img: "/images/polo.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/polo.jpg"
+    ]
   },
   {
     id: 9,
@@ -89,7 +112,10 @@ const cars = [
     km: 29000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/i20.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/i20.jpg"
+    ]
   },
   {
     id: 10,
@@ -99,7 +125,10 @@ const cars = [
     km: 18000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/baleno.jpg"
+    transmission: "Automatic",
+    img: [
+      "/images/baleno.jpg"
+    ]
   },
   {
     id: 11,
@@ -109,7 +138,10 @@ const cars = [
     km: 41000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/harrier.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/harrier.jpg"
+    ]
   },
   {
     id: 12,
@@ -119,7 +151,10 @@ const cars = [
     km: 33000,
     owner: "2nd Owner",
     condition: "Good",
-    img: "/images/hector.jpg"
+    transmission: "Automatic",
+    img: [
+      "/images/hector.jpg"
+    ]
   },
   {
     id: 13,
@@ -129,7 +164,10 @@ const cars = [
     km: 48000,
     owner: "2nd Owner",
     condition: "Accidental",
-    img: "/images/amaze.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/amaze.jpg"
+    ]
   },
   {
     id: 14,
@@ -139,7 +177,10 @@ const cars = [
     km: 22000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/brezza.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/brezza.jpg"
+    ]
   },
   {
     id: 15,
@@ -149,7 +190,10 @@ const cars = [
     km: 31000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/sonet.jpg"
+    transmission: "Automatic",
+    img: [
+      "/images/sonet.jpg"
+    ]
   },
   {
     id: 16,
@@ -159,7 +203,10 @@ const cars = [
     km: 72000,
     owner: "2nd Owner",
     condition: "Good",
-    img: "/images/fortuner.jpg"
+    transmission: "Automatic",
+    img: [
+      "/images/fortuner.jpg"
+    ]
   },
   {
     id: 17,
@@ -169,7 +216,10 @@ const cars = [
     km: 27000,
     owner: "1st Owner",
     condition: "Flooded",
-    img: "/images/kwid.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/kwid.jpg"
+    ]
   },
   {
     id: 18,
@@ -179,7 +229,10 @@ const cars = [
     km: 19000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/slavia.jpg"
+    transmission: "Automatic",
+    img: [
+      "/images/slavia.jpg"
+    ]
   },
   {
     id: 19,
@@ -189,7 +242,10 @@ const cars = [
     km: 26000,
     owner: "1st Owner",
     condition: "Good",
-    img: "/images/thar.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/thar.jpg"
+    ]
   },
   {
     id: 20,
@@ -199,7 +255,10 @@ const cars = [
     km: 55000,
     owner: "2nd Owner",
     condition: "Accidental",
-    img: "/images/ecosport.jpg"
+    transmission: "Manual",
+    img: [
+      "/images/ecosport.jpg"
+    ]
   }
 ];
 
