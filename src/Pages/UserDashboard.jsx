@@ -1,66 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
 
-  const [user, setUser] = useState(null);
+  const { user, logout } = useContext(AuthContext);
+
   const [editing, setEditing] = useState(false);
+  const [profile, setProfile] = useState(user);
 
-  // Get logged-in user
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("loggedInUser");
+  if (!user) {
+    navigate("/login");
+    return null;
+  }
 
-    if (!loggedInUser) {
-      navigate("/login");
-      return;
-    }
-
-    setUser(JSON.parse(loggedInUser));
-  }, [navigate]);
-
-  // Handle input changes
   const handleChange = (e) => {
-    setUser({
-      ...user,
+    setProfile({
+      ...profile,
       [e.target.name]: e.target.value,
     });
   };
 
-  // Save profile
   const handleSave = () => {
-    localStorage.setItem(
-      "loggedInUser",
-      JSON.stringify(user)
-    );
-
-    // Also update the user inside users
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    const updatedUsers = users.map((item) =>
-      item.id === user.id ? user : item
-    );
-
-    localStorage.setItem(
-      "users",
-      JSON.stringify(updatedUsers)
-    );
-
     setEditing(false);
-
     alert("Profile updated successfully!");
   };
 
-  // Logout
   const handleLogout = () => {
-    localStorage.removeItem("loggedInUser");
+    logout();
     navigate("/login");
   };
-
-  // Prevent rendering before user is loaded
-  if (!user) {
-    return null;
-  }
 
   return (
     <div className="container py-5">
@@ -83,23 +53,24 @@ const UserDashboard = () => {
 
             {/* Avatar */}
             <div
-              className="rounded-circle bg-primary text-white d-flex
-              align-items-center justify-content-center mx-auto mb-3"
+              className="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3"
               style={{
                 width: "100px",
                 height: "100px",
                 fontSize: "40px",
               }}
             >
-              {user.fname?.charAt(0).toUpperCase()}
+              {(profile.name || "U")
+                .charAt(0)
+                .toUpperCase()}
             </div>
 
             <h4 className="fw-bold">
-              {user.fname}
+              {profile.name || "User"}
             </h4>
 
             <p className="text-muted mb-3">
-              {user.email}
+              {profile.email}
             </p>
 
             <button
@@ -126,7 +97,13 @@ const UserDashboard = () => {
 
               <button
                 className="btn btn-primary"
-                onClick={() => setEditing(!editing)}
+                onClick={() => {
+                  if (editing) {
+                    setProfile(user);
+                  }
+
+                  setEditing(!editing);
+                }}
               >
                 {editing ? "Cancel" : "Edit Profile"}
               </button>
@@ -144,9 +121,9 @@ const UserDashboard = () => {
 
                 <input
                   type="text"
-                  name="fname"
+                  name="name"
                   className="form-control"
-                  value={user.fname || ""}
+                  value={profile.name || ""}
                   onChange={handleChange}
                   disabled={!editing}
                 />
@@ -163,9 +140,8 @@ const UserDashboard = () => {
                 <input
                   type="email"
                   name="email"
-                  className="form-control"
-                  value={user.email || ""}
-                  onChange={handleChange}
+                  className="form-control bg-light"
+                  value={profile.email || ""}
                   disabled
                 />
 
@@ -182,7 +158,7 @@ const UserDashboard = () => {
                   type="text"
                   name="pno"
                   className="form-control"
-                  value={user.pno || ""}
+                  value={profile.pno || ""}
                   onChange={handleChange}
                   disabled={!editing}
                 />
@@ -200,7 +176,7 @@ const UserDashboard = () => {
                   type="text"
                   name="city"
                   className="form-control"
-                  value={user.city || ""}
+                  value={profile.city || ""}
                   onChange={handleChange}
                   disabled={!editing}
                 />
@@ -218,7 +194,7 @@ const UserDashboard = () => {
                   name="address"
                   className="form-control"
                   rows="3"
-                  value={user.address || ""}
+                  value={profile.address || ""}
                   onChange={handleChange}
                   disabled={!editing}
                 />
@@ -247,63 +223,45 @@ const UserDashboard = () => {
       <div className="row g-4 mt-2">
 
         <div className="col-md-4">
-
           <div className="card border-0 shadow-sm p-4">
-
             <h6 className="text-muted">
               My Bookings
             </h6>
 
-            <h2 className="fw-bold">
-              3
-            </h2>
+            <h2 className="fw-bold">3</h2>
 
             <p className="mb-0 text-muted">
               Total car bookings
             </p>
-
           </div>
-
         </div>
 
         <div className="col-md-4">
-
           <div className="card border-0 shadow-sm p-4">
-
             <h6 className="text-muted">
               Saved Cars
             </h6>
 
-            <h2 className="fw-bold">
-              5
-            </h2>
+            <h2 className="fw-bold">5</h2>
 
             <p className="mb-0 text-muted">
               Cars added to favorites
             </p>
-
           </div>
-
         </div>
 
         <div className="col-md-4">
-
           <div className="card border-0 shadow-sm p-4">
-
             <h6 className="text-muted">
               Recently Viewed
             </h6>
 
-            <h2 className="fw-bold">
-              8
-            </h2>
+            <h2 className="fw-bold">8</h2>
 
             <p className="mb-0 text-muted">
               Cars recently viewed
             </p>
-
           </div>
-
         </div>
 
       </div>

@@ -1,20 +1,27 @@
 import { createContext, useState } from "react";
-import users from "../data/users";
+import usersData from "../data/users";
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const [users, setUsers] = useState(() => {
+    const savedUsers = localStorage.getItem("users");
+
+    return savedUsers ? JSON.parse(savedUsers) : usersData;
+  });
+
   const [user, setUser] = useState(() => {
-    const loggedUser = localStorage.getItem("loggedUser");
+    const loggedUser = localStorage.getItem("loggedInUser");
 
     return loggedUser ? JSON.parse(loggedUser) : null;
   });
 
+  // Register User
   const registerUser = (userData) => {
-    const savedUsers = JSON.parse(localStorage.getItem("users")) || users;
-
-    const emailExists = savedUsers.some(
-      (u) => u.email === userData.email
+    const emailExists = users.some(
+      (existingUser) =>
+        existingUser.email.toLowerCase() ===
+        userData.email.toLowerCase()
     );
 
     if (emailExists) {
@@ -26,13 +33,23 @@ const AuthProvider = ({ children }) => {
 
     const newUser = {
       id: Date.now(),
-      ...userData,
+      name: userData.fname,
+      address: userData.address,
+      city: userData.city,
+      email: userData.email,
+      pno: userData.pno,
+      password: userData.password,
       role: "user",
     };
 
-    savedUsers.push(newUser);
+    const updatedUsers = [...users, newUser];
 
-    localStorage.setItem("users", JSON.stringify(savedUsers));
+    setUsers(updatedUsers);
+
+    localStorage.setItem(
+      "users",
+      JSON.stringify(updatedUsers)
+    );
 
     return {
       success: true,
@@ -40,11 +57,12 @@ const AuthProvider = ({ children }) => {
     };
   };
 
+  // Login
   const login = (email, password) => {
-    const savedUsers = JSON.parse(localStorage.getItem("users")) || users;
-
-    const foundUser = savedUsers.find(
-      (u) => u.email === email && u.password === password
+    const foundUser = users.find(
+      (existingUser) =>
+        existingUser.email === email &&
+        existingUser.password === password
     );
 
     if (!foundUser) {
@@ -57,7 +75,7 @@ const AuthProvider = ({ children }) => {
     setUser(foundUser);
 
     localStorage.setItem(
-      "loggedUser",
+      "loggedInUser",
       JSON.stringify(foundUser)
     );
 
@@ -67,18 +85,58 @@ const AuthProvider = ({ children }) => {
     };
   };
 
+  // Delete User
+  const deleteUser = (id) => {
+    const updatedUsers = users.filter(
+      (existingUser) => existingUser.id !== id
+    );
+
+    setUsers(updatedUsers);
+
+    localStorage.setItem(
+      "users",
+      JSON.stringify(updatedUsers)
+    );
+  };
+
+  // Change Role
+  const changeUserRole = (id) => {
+    const updatedUsers = users.map((existingUser) =>
+      existingUser.id === id
+        ? {
+            ...existingUser,
+            role:
+              existingUser.role === "admin"
+                ? "user"
+                : "admin",
+          }
+        : existingUser
+    );
+
+    setUsers(updatedUsers);
+
+    localStorage.setItem(
+      "users",
+      JSON.stringify(updatedUsers)
+    );
+  };
+
+  // Logout
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("loggedUser");
+    localStorage.removeItem("loggedInUser");
   };
 
   return (
     <AuthContext.Provider
       value={{
         user,
+        users,
         registerUser,
         login,
         logout,
+        deleteUser,
+        changeUserRole,
       }}
     >
       {children}

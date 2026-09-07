@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const AdminNavbar = () => {
    const navigate = useNavigate();
@@ -18,34 +18,30 @@ const AdminNavbar = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-white">
   <div className="container-fluid">
-    <a className="navbar-brand" href="#">AutoKart</a>
+    <Link className="navbar-brand" to="/admin">AutoKart</Link>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/home">Home</a>
+          <Link className="nav-link active" aria-current="page" to="/admin">Dashboard</Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="cars">Cars Stock</a>
+          <Link className="nav-link" to="manage-cars">Manage Cars</Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Services</a>
+          <Link className="nav-link" to="manage-users">Manage Users</Link>
         </li> 
 
         <li className="nav-item">
-          <a className="nav-link" href="emi">Emi Calculator</a>
-        </li>
-
-           <li className="nav-item">
-          <a className="nav-link" href="about">About Us</a>
+          <Link className="nav-link" to="manage-enquiries">Manage Enquiries</Link>
         </li>
 
          <li className="nav-item">
-          <a className="nav-link" href="contact">Contact Us</a>
+          <Link className="nav-link" to="manage-bookings">Manage Bookings</Link>
         </li>
-      
+
       </ul>
     </div>
 

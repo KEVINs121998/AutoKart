@@ -4,6 +4,9 @@ const users = [
     name: "Kevin Shah",
     email: "kevinshah@gmail.com",
     password: "goku1234",
+    pno: "9898989898",
+    city: "Mumbai",
+    address: "Mumbai, Maharashtra",
     role: "user",
   },
   {

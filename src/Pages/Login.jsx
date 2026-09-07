@@ -40,9 +40,9 @@ const Login = () => {
     );
 
     if (user.role === "admin") {
-      navigate("/admin/dashboard");
+      navigate("/admin");
     } else {
-      navigate("/profile");
+      navigate("/");
     }
   };
 

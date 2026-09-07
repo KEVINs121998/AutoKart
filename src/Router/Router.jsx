@@ -10,10 +10,14 @@ import Emi from "../Pages/Emi";
 import CarDetails from "../Pages/CarDetails";
 import UserDashboard from "../Pages/UserDashboard";
 import ProtectedRoute from "../Component/ProtectedRoute";
-import AdminDashboard from "../Pages/AdminDashboard";
+import AdminDashboard from "../Pages/Admin/AdminDashboard";
 import Inventory from "../Pages/Inventory";
 import Payment from "../Pages/Payment";
 import Services from "../Pages/Services";
+import ManageCars from "../Pages/Admin/ManageCars";
+import ManageBookings from "../Pages/Admin/ManageBookings";
+import ManageEnquiries from "../Pages/Admin/ManageEnquiries";
+import ManageUsers from "../Pages/Admin/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -21,41 +25,77 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Home /> },
-         { path: "payment", element: <Payment /> },
-         { path: "services", element: <Services /> },
+      { path: "payment", element: <Payment /> },
+      { path: "services", element: <Services /> },
       { path: "cars", element: <Cars /> },
       { path: "contact", element: <Contact /> },
       { path: "emi", element: <Emi /> },
       { path: "cardetails/:id", element: <CarDetails /> },
-            { path: "login", element: <Login /> },
-                  { path: "register", element: <Register /> },
-                  {
-  path: "profile",
-  element: (
-    <ProtectedRoute role="user">
-      <UserDashboard />
-    </ProtectedRoute>
-  ),
-},
-     {
-  path: "inventory",
-  element: (
-    <ProtectedRoute role="user">
-      <Inventory />
-    </ProtectedRoute>
-  ),
-},
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute role="user">
+            <UserDashboard />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "inventory",
+        element: (
+          <ProtectedRoute role="user">
+            <Inventory />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
   {
-    path:"/admin",
+    path: "/admin",
     element: <AuthLayout />,
     children: [
-      { path: "dashboard", element:
-        <ProtectedRoute role="admin">
-          <AdminDashboard /> 
-        </ProtectedRoute>
-        },
+      {
+        index: true,
+        element: (
+          <ProtectedRoute role="admin">
+            <AdminDashboard />
+          </ProtectedRoute>
+        ),
+      },
+
+      {
+        path: "manage-cars",
+        element: (
+          <ProtectedRoute role="admin">
+            <ManageCars />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "manage-users",
+        element: (
+          <ProtectedRoute role="admin">
+            <ManageUsers />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "manage-bookings",
+        element: (
+          <ProtectedRoute role="admin">
+            <ManageBookings />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "manage-enquiries",
+        element: (
+          <ProtectedRoute role="admin">
+            <ManageEnquiries />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
