@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../Css/Register.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 const Register = () => {
+  const { registerUser } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
@@ -15,29 +18,40 @@ const Register = () => {
 
   const password = watch("password");
 
-  const onSubmit = (data) => {
-    console.log(data);
-    navigate("/login");
-  };
-
   const [showPassword, setShowPassword] = useState(false);
-const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+const onSubmit = (data) => {
+  const result = registerUser(data);
+
+  if (!result.success) {
+    alert(result.message);
+    return;
+  }
+
+  alert("Registration successful!");
+
+  navigate("/login");
+};
 
   return (
     <div className="register-page">
+
       {/* Left Side */}
       <div className="register-hero">
         <div className="hero-overlay"></div>
 
         <div className="hero-content">
+
           <div className="brand">
-            <span className="brand-icon">🏎️ </span>
+            <span className="brand-icon">🏎️</span>
             <span>AutoKart</span>
           </div>
 
           <div className="hero-text">
-            <p className="hero-small-title">YOUR NEXT CAR STARTS HERE</p>
+            <p className="hero-small-title">
+              YOUR NEXT CAR STARTS HERE
+            </p>
 
             <h1>
               Find. Buy.
@@ -67,26 +81,37 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
               <span>Easy Buying</span>
             </div>
           </div>
+
         </div>
       </div>
 
       {/* Right Side */}
       <div className="register-section">
+
         <div className="register-container">
+
           <div className="mobile-brand">
             <span className="brand-icon">🏎️</span>
             AutoKart
           </div>
 
           <div className="register-header">
-            <p className="form-label-top">CREATE YOUR ACCOUNT</p>
+            <p className="form-label-top">
+              CREATE YOUR ACCOUNT
+            </p>
 
             <h2>Welcome to AutoKart</h2>
 
-            <p>Create an account to buy, sell and manage your cars.</p>
+            <p>
+              Create an account to buy, sell and manage your cars.
+            </p>
           </div>
 
-          <form className="register-form" onSubmit={handleSubmit(onSubmit)}>
+          <form
+            className="register-form"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+
             {/* Full Name */}
             <div className="form-group">
               <label htmlFor="fname">Full Name</label>
@@ -99,7 +124,8 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
                   required: "Full Name is required",
                   pattern: {
                     value: /^[A-Za-z ]+$/,
-                    message: "Full name can contain only letters and spaces",
+                    message:
+                      "Full name can contain only letters and spaces",
                   },
                   minLength: {
                     value: 3,
@@ -110,32 +136,65 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
               />
 
               {errors.fname && (
-                <p className="error-message">{errors.fname.message}</p>
+                <p className="error-message">
+                  {errors.fname.message}
+                </p>
               )}
             </div>
 
+            {/* Address */}
             <div className="form-group">
-  <label htmlFor="address">Address</label>
+              <label htmlFor="address">Address</label>
 
-  <textarea
-    id="address"
-    placeholder="Enter your complete address"
-    {...register("address", {
-      required: "Address is required",
-      minLength: {
-        value: 10,
-        message: "Please enter a complete address",
-      },
-    })}
-    className={errors.address ? "input-error" : ""}
-  ></textarea>
+              <textarea
+                id="address"
+                placeholder="Enter your complete address"
+                {...register("address", {
+                  required: "Address is required",
+                  minLength: {
+                    value: 10,
+                    message: "Please enter a complete address",
+                  },
+                })}
+                className={errors.address ? "input-error" : ""}
+              />
 
-  {errors.address && (
-    <p className="error-message">
-      {errors.address.message}
-    </p>
-  )}
-</div>
+              {errors.address && (
+                <p className="error-message">
+                  {errors.address.message}
+                </p>
+              )}
+            </div>
+
+            {/* City */}
+            <div className="form-group">
+              <label htmlFor="city">City</label>
+
+              <input
+                type="text"
+                id="city"
+                placeholder="Enter your city"
+                {...register("city", {
+                  required: "City is required",
+                  pattern: {
+                    value: /^[A-Za-z ]+$/,
+                    message:
+                      "City can contain only letters and spaces",
+                  },
+                  minLength: {
+                    value: 2,
+                    message: "Enter a valid city name",
+                  },
+                })}
+                className={errors.city ? "input-error" : ""}
+              />
+
+              {errors.city && (
+                <p className="error-message">
+                  {errors.city.message}
+                </p>
+              )}
+            </div>
 
             {/* Email */}
             <div className="form-group">
@@ -156,150 +215,184 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
               />
 
               {errors.email && (
-                <p className="error-message">{errors.email.message}</p>
+                <p className="error-message">
+                  {errors.email.message}
+                </p>
               )}
             </div>
 
-            {/* Phone number */}
+            {/* Phone Number */}
             <div className="form-group">
-              <label htmlFor="phone">Phone number</label>
+              <label htmlFor="pno">Phone Number</label>
 
               <input
-                type="number"
+                type="tel"
                 id="pno"
                 placeholder="Enter your number"
                 {...register("pno", {
                   required: "Phone number is required",
                   pattern: {
                     value: /^[6-9]\d{9}$/,
-                    message: "Enter a valid 10-digit phone number",
-                  },
-                  maxLength: {
-                    value: 10,
-                    message: "Use can enter only 10 numbers",
+                    message:
+                      "Enter a valid 10-digit phone number",
                   },
                 })}
-                className={errors.password ? "input-error" : ""}
+                className={errors.pno ? "input-error" : ""}
               />
 
-              {errors.password && (
-                <p className="error-message">{errors.password.message}</p>
+              {errors.pno && (
+                <p className="error-message">
+                  {errors.pno.message}
+                </p>
               )}
             </div>
 
-           {/* Password */}
-<div className="form-group">
-  <label htmlFor="password">Password</label>
+            {/* Password */}
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
 
-  <div className="password-wrapper">
+              <div className="password-wrapper">
 
-    <input
-      type={showPassword ? "text" : "password"}
-      id="password"
-      placeholder="Create a password"
-      {...register("password", {
-        required: "Password is required",
-        minLength: {
-          value: 8,
-          message: "Use at least 8 characters",
-        },
-      })}
-      className={errors.password ? "input-error" : ""}
-    />
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  placeholder="Create a password"
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 8,
+                      message: "Use at least 8 characters",
+                    },
+                  })}
+                  className={
+                    errors.password ? "input-error" : ""
+                  }
+                />
 
-    <button
-      type="button"
-      className="password-toggle"
-      onClick={() => setShowPassword(!showPassword)}
-    >
-      {showPassword ? "Hide" : "Show"}
-    </button>
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() =>
+                    setShowPassword(!showPassword)
+                  }
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
 
-  </div>
+              </div>
 
-  {errors.password && (
-    <p className="error-message">
-      {errors.password.message}
-    </p>
-  )}
-</div>
+              {errors.password && (
+                <p className="error-message">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
 
+            {/* Confirm Password */}
+            <div className="form-group">
+              <label htmlFor="cpassword">
+                Confirm Password
+              </label>
 
-{/* Confirm Password */}
-<div className="form-group">
-  <label htmlFor="cpassword">Confirm Password</label>
+              <div className="password-wrapper">
 
-  <div className="password-wrapper">
+                <input
+                  type={
+                    showConfirmPassword ? "text" : "password"
+                  }
+                  id="cpassword"
+                  placeholder="Confirm your password"
+                  {...register("cpassword", {
+                    required:
+                      "Confirm Password is required",
+                    validate: (value) =>
+                      value === password ||
+                      "Passwords do not match",
+                  })}
+                  className={
+                    errors.cpassword
+                      ? "input-error"
+                      : ""
+                  }
+                />
 
-    <input
-      type={showConfirmPassword ? "text" : "password"}
-      id="cpassword"
-      placeholder="Confirm your password"
-      {...register("cpassword", {
-        required: "Confirm Password is required",
-        validate: (value) =>
-          value === password || "Passwords do not match",
-      })}
-      className={errors.cpassword ? "input-error" : ""}
-    />
+                <button
+                  type="button"
+                  className="password-toggle"
+                  onClick={() =>
+                    setShowConfirmPassword(
+                      !showConfirmPassword
+                    )
+                  }
+                >
+                  {showConfirmPassword ? "Hide" : "Show"}
+                </button>
 
-    <button
-      type="button"
-      className="password-toggle"
-      onClick={() =>
-        setShowConfirmPassword(!showConfirmPassword)
-      }
-    >
-      {showConfirmPassword ? "Hide" : "Show"}
-    </button>
+              </div>
 
-  </div>
+              {errors.cpassword && (
+                <p className="error-message">
+                  {errors.cpassword.message}
+                </p>
+              )}
+            </div>
 
-  {errors.cpassword && (
-    <p className="error-message">
-      {errors.cpassword.message}
-    </p>
-  )}
-</div>
-
+            {/* Terms & Conditions */}
             <div className="terms-checkbox">
 
-  <label>
-    <input
-      type="checkbox"
-      {...register("terms", {
-        required: "You must accept the Terms & Conditions",
-      })}
-    />
+              <label>
 
-    <span>
-      I agree to the{" "}
-      <a href="/terms" target="_blank" rel="noreferrer">
-        Terms & Conditions
-      </a>{" "}
-      and{" "}
-      <a href="/privacy" target="_blank" rel="noreferrer">
-        Privacy Policy
-      </a>
-    </span>
-  </label>
+                <input
+                  type="checkbox"
+                  {...register("terms", {
+                    required:
+                      "You must accept the Terms & Conditions",
+                  })}
+                />
 
-  {errors.terms && (
-    <p className="error-message">
-      {errors.terms.message}
-    </p>
-  )}
+                <span>
+                  I agree to the{" "}
+                  <a
+                    href="/terms"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Terms & Conditions
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="/privacy"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Privacy Policy
+                  </a>
+                </span>
 
-</div>
+              </label>
 
-            <button type="submit" className="register-button">
+              {errors.terms && (
+                <p className="error-message">
+                  {errors.terms.message}
+                </p>
+              )}
+
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              className="register-button"
+            >
               Create Account
               <span>→</span>
             </button>
+
           </form>
 
           <p className="login-text">
             Already have an account?
+
             <button
               type="button"
               onClick={() => navigate("/login")}
@@ -308,8 +401,11 @@ const [showConfirmPassword, setShowConfirmPassword] = useState(false);
               Sign in
             </button>
           </p>
+
         </div>
+
       </div>
+
     </div>
   );
 };

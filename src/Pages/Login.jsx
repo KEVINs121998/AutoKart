@@ -13,24 +13,38 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const[loginError,setLoginError]=useState("")
+  const [loginError, setLoginError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = (data) => {
-const user=users.find((user)=>  
-user.email===data.email && user.password===data.password
-)
-if(!user){
-  setLoginError("Invalid email or password")
-  return;
-}
-setLoginError("")
 
-localStorage.setItem("loggedInUser",JSON.stringify(user))
+    const savedUsers =
+      JSON.parse(localStorage.getItem("users")) || users;
 
-user.role==="admin"?navigate("/admin/dashboard"):navigate('/user-dashboard')
+    const user = savedUsers.find(
+      (user) =>
+        user.email === data.email &&
+        user.password === data.password
+    );
+
+    if (!user) {
+      setLoginError("Invalid email or password");
+      return;
+    }
+
+    setLoginError("");
+
+    localStorage.setItem(
+      "loggedInUser",
+      JSON.stringify(user)
+    );
+
+    if (user.role === "admin") {
+      navigate("/admin/dashboard");
+    } else {
+      navigate("/profile");
+    }
   };
-
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="login-page">

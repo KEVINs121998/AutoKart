@@ -24,7 +24,7 @@ const Inventory = () => {
         </div>
 
         <span className="badge bg-primary fs-6">
-          {inventory.length} Cars
+          {inventory.length} {inventory.length>1?"Cars":"Car"}
         </span>
       </div>
 

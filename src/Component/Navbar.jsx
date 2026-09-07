@@ -1,7 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { useInventory } from "../Context/InventoryContext";
 
 const Navbar = () => {
+
+ const { inventory } = useInventory();
+
   const navigate = useNavigate();
 
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -14,7 +18,7 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-white">
   <div className="container-fluid">
-    <a className="navbar-brand" href="/home">AutoKart</a>
+    <a className="navbar-brand" href="/">AutoKart</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
     </button>
@@ -38,20 +42,18 @@ const Navbar = () => {
           <a className="nav-link" href="/contact">Contact Us</a>
         </li>
 
-                 <li className="nav-item">
-          <a className="nav-link" href="/inventory">My Inventory</a>
+          { user&&(  
+            <>
+            <li className="nav-item">
+          <a className="nav-link" href="/inventory">My Inventory ({inventory.length})
+</a>
         </li>
 
-         <li className="nav-item">
-          <a className="nav-link" href="/login">Logout</a>
+            <li className="nav-item">
+          <a className="nav-link" href="/profile">Profile</a>
         </li>
-
-          <li className="nav-item">
-          <a className="nav-link" href="inventory">My Inventory</a>
-        </li>
-
-
-
+        </>
+        )}
       </ul>
 
        {/* Right Side */}

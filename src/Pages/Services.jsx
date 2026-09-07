@@ -70,7 +70,7 @@ const Services = () => {
             Our Services
           </h1>
 
-          <p className="lead text-white-50 mb-0">
+          <p className="lead mb-0">
             Professional car services at affordable prices
           </p>
         </div>
