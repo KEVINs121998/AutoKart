@@ -1,102 +1,186 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
+import '../Css/Navbar.css'
 import { useInventory } from "../Context/InventoryContext";
 
 const Navbar = () => {
+  const { user, logout } = useAuth();
+  const { inventory } = useInventory();
+  const navigate=useNavigate()
 
- const { inventory } = useInventory();
+const handleLogout = () => {
+  logout();
+  navigate("/login");
+};
 
-  const navigate = useNavigate();
-
-  const user = JSON.parse(localStorage.getItem("loggedInUser"));
-
-  const handleLogout = () => {
-    localStorage.removeItem("loggedInUser");
-    navigate("/login");
-  };
   return (
-    <>
-      <nav className="navbar navbar-expand-lg bg-white">
-  <div className="container-fluid">
-    <a className="navbar-brand" href="/">AutoKart</a>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/">Home</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/cars">Cars Stock</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/services">Services</a>
-        </li> 
+    <nav className="navbar navbar-expand-lg autokart-navbar sticky-top">
+      <div className="container">
 
-        <li className="nav-item">
-          <a className="nav-link" href="/emi">Emi Calculator</a>
-        </li>
+        {/* Logo */}
+        <Link className="navbar-brand autokart-logo" to="/">
+          <span className="logo-icon">
+            <i className="bi bi-car-front-fill"></i>
+          </span>
+          Auto<span>Kart</span>
+        </Link>
 
-         <li className="nav-item">
-          <a className="nav-link" href="/contact">Contact Us</a>
-        </li>
+        {/* Mobile Button */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+        >
+          <i className="bi bi-list"></i>
+        </button>
 
-          { user&&(  
-            <>
-            <li className="nav-item">
-          <a className="nav-link" href="/inventory">My Inventory ({inventory.length})
-</a>
-        </li>
+        <div className="collapse navbar-collapse" id="navbarContent">
+
+          {/* Links */}
+          <ul className="navbar-nav mx-auto gap-lg-2">
 
             <li className="nav-item">
-          <a className="nav-link" href="/profile">Profile</a>
-        </li>
-        </>
-        )}
-      </ul>
-
-       {/* Right Side */}
-          <div className="d-flex align-items-center gap-3 ms-auto">
-
-            {user ? (
-              <>
-                <span className="text-white">
-                  Welcome, {user.name}
-                </span>
-
-                <button
-                  className="btn btn-danger"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                className="btn"
-                to="/login"
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
               >
+                Home
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to="/cars"
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                Cars
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to="/services"
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                Services
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to="/emi"
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                EMI Calculator
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                Contact
+              </NavLink>
+            </li>
+
+          </ul>
+
+          {/* Right Side */}
+          <div className="navbar-actions d-flex align-items-center gap-2">
+
+            {/* Inventory */}
+            {user && (
+              <Link to="/inventory" className="nav-icon-btn">
+                <i className="bi bi-heart"></i>
+                <span>My Inventory({inventory.length})</span>
+              </Link>
+            )}
+
+            {!user ? (
+              <Link to="/login" className="login-btn">
+                <i className="bi bi-person"></i>
                 Login
               </Link>
-              
-                <Link
-      className="btn btn-primary"
-      to="/register"
-    >
-      Register
-    </Link>
-              </>
-            
+            ) : (
+              <div className="dropdown">
+                <button
+                  className="profile-btn dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                >
+                  <span className="profile-circle">
+                    <i className="bi bi-person-fill"></i>
+                  </span>
+
+                  <span className="profile-name">
+                    {user.name}
+                  </span>
+                </button>
+
+                <ul className="dropdown-menu dropdown-menu-end profile-dropdown">
+
+                  <li>
+                    <Link
+                      className="dropdown-item"
+                      to="/profile"
+                    >
+                      <i className="bi bi-person me-2"></i>
+                      My Profile
+                    </Link>
+                  </li>
+
+                  {user.role === "admin" && (
+                    <>
+                      <li>
+                        <hr className="dropdown-divider" />
+                      </li>
+
+                      <li>
+                        <Link
+                          className="dropdown-item admin-link"
+                          to="/admin/dashboard"
+                        >
+                          <i className="bi bi-speedometer2 me-2"></i>
+                          Admin Dashboard
+                        </Link>
+                      </li>
+                    </>
+                  )}
+
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+
+                  <li>
+                    <button
+                      className="dropdown-item logout-item"
+                      onClick={handleLogout}
+                    >
+                      <i className="bi bi-box-arrow-right me-2"></i>
+                      Logout
+                    </button>
+                  </li>
+
+                </ul>
+              </div>
             )}
 
           </div>
-    </div>
-  </div>
-</nav>
-    </>
-  )
-}
+        </div>
+      </div>
+    </nav>
+  );
+};
 
-export default Navbar
+export default Navbar;

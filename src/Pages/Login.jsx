@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../Css/Login.css";
 import { use, useState } from "react";
 import users from "../data/users";
+import { useAuth } from "../Context/AuthContext";
 
 const Login = () => {
   const {
@@ -12,39 +13,27 @@ const Login = () => {
   } = useForm();
 
   const navigate = useNavigate();
+   const { login } = useAuth();
 
   const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit = (data) => {
+const onSubmit = (data) => {
+  const result = login(data.email, data.password);
 
-    const savedUsers =
-      JSON.parse(localStorage.getItem("users")) || users;
+  if (!result.success) {
+    setLoginError(result.message);
+    return;
+  }
 
-    const user = savedUsers.find(
-      (user) =>
-        user.email === data.email &&
-        user.password === data.password
-    );
+  setLoginError("");
 
-    if (!user) {
-      setLoginError("Invalid email or password");
-      return;
-    }
-
-    setLoginError("");
-
-    localStorage.setItem(
-      "loggedInUser",
-      JSON.stringify(user)
-    );
-
-    if (user.role === "admin") {
-      navigate("/admin");
-    } else {
-      navigate("/");
-    }
-  };
+  if (result.user.role === "admin") {
+    navigate("/admin");
+  } else {
+    navigate("/");
+  }
+};
 
   return (
     <div className="login-page">

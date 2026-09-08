@@ -24,28 +24,28 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <Home /> },
-      { path: "payment", element: <Payment /> },
-      { path: "services", element: <Services /> },
-      { path: "cars", element: <Cars /> },
-      { path: "contact", element: <Contact /> },
-      { path: "emi", element: <Emi /> },
-      { path: "cardetails/:id", element: <CarDetails /> },
-      { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
-      {
-        path: "profile",
-        element: (
-          <ProtectedRoute role="user">
-            <UserDashboard />
-          </ProtectedRoute>
-        ),
-      },
+      { path: "login", element: <Login /> },
+      { index: true, element: <Home /> },
+      { path: "cars", element: <Cars /> },
+      { path: "cardetails/:id", element: <CarDetails /> },
+      { path: "services", element: <Services /> },
+      { path: "emi", element: <Emi /> },
+      { path: "contact", element: <Contact /> },
+      { path: "payment", element: <Payment /> },
       {
         path: "inventory",
         element: (
           <ProtectedRoute role="user">
             <Inventory />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute role="user">
+            <UserDashboard />
           </ProtectedRoute>
         ),
       },

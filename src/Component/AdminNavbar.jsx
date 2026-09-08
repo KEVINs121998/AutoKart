@@ -1,89 +1,182 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, useNavigate } from 'react-router-dom';
+
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
+import "../Css/AdminNavbar.css";
 
 const AdminNavbar = () => {
-   const navigate = useNavigate();
-
-  // Get logged-in user from localStorage
-  const user = JSON.parse(
-    localStorage.getItem("loggedInUser")
-  );
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const handleLogout = () => {
-    localStorage.removeItem("loggedInUser");
+    logout();
     navigate("/login");
   };
 
   return (
-    <>
-      <nav className="navbar navbar-expand-lg bg-white">
-  <div className="container-fluid">
-    <Link className="navbar-brand" to="/admin">AutoKart</Link>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarNav">
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link className="nav-link active" aria-current="page" to="/admin">Dashboard</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="manage-cars">Manage Cars</Link>
-        </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="manage-users">Manage Users</Link>
-        </li> 
+    <nav className="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
+      <div className="container-fluid px-4">
 
-        <li className="nav-item">
-          <Link className="nav-link" to="manage-enquiries">Manage Enquiries</Link>
-        </li>
+        {/* Brand */}
+        <Link
+          className="navbar-brand d-flex align-items-center"
+          to="/admin"
+        >
+          <i className="bi bi-car-front-fill text-primary fs-3 me-2"></i>
 
-         <li className="nav-item">
-          <Link className="nav-link" to="manage-bookings">Manage Bookings</Link>
-        </li>
+          <span className="fw-bold fs-4">
+            Auto<span className="text-primary">Kart</span>
+          </span>
+        </Link>
 
-      </ul>
-    </div>
+        {/* Mobile Toggle */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#adminNavbar"
+          aria-controls="adminNavbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-     {/* Right Side */}
-        <div className="d-flex align-items-center gap-3 ms-auto">
+        {/* Navbar Content */}
+        <div
+          className="collapse navbar-collapse"
+          id="adminNavbar"
+        >
 
-          {user ? (
-            <>
-              <span className="text-white">
-                Welcome, {user.name}
-              </span>
+          {/* Navigation */}
+          <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
 
-              <button
-                className="btn btn-danger"
-                onClick={handleLogout}
+            <li className="nav-item">
+              <NavLink
+                to="/admin"
+                end
+                className={({ isActive }) =>
+                  `nav-link px-3 ${
+                    isActive
+                      ? "text-primary fw-semibold"
+                      : "text-dark"
+                  }`
+                }
               >
-                Logout
-              </button>
-            </>
-          ) : (
-             <>
-                           <Link
-                           className="btn btn-outline-light"
-                           to="/login"
-                         >
-                           Login
-                         </Link>
-                         
-                           <Link
-                 className="btn btn-primary"
-                 to="/register"
-               >
-                 Register
-               </Link>
-                         </>
-          )}
+                <i className="bi bi-speedometer2 me-1"></i>
+                Dashboard
+              </NavLink>
+            </li>
 
+            <li className="nav-item">
+              <NavLink
+                to="/admin/manage-cars"
+                className={({ isActive }) =>
+                  `nav-link px-3 ${
+                    isActive
+                      ? "text-primary fw-semibold"
+                      : "text-dark"
+                  }`
+                }
+              >
+                <i className="bi bi-car-front me-1"></i>
+                Manage Cars
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to="/admin/manage-users"
+                className={({ isActive }) =>
+                  `nav-link px-3 ${
+                    isActive
+                      ? "text-primary fw-semibold"
+                      : "text-dark"
+                  }`
+                }
+              >
+                <i className="bi bi-people me-1"></i>
+                Users
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to="/admin/manage-enquiries"
+                className={({ isActive }) =>
+                  `nav-link px-3 ${
+                    isActive
+                      ? "text-primary fw-semibold"
+                      : "text-dark"
+                  }`
+                }
+              >
+                <i className="bi bi-chat-left-text me-1"></i>
+                Enquiries
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
+                to="/admin/manage-bookings"
+                className={({ isActive }) =>
+                  `nav-link px-3 ${
+                    isActive
+                      ? "text-primary fw-semibold"
+                      : "text-dark"
+                  }`
+                }
+              >
+                <i className="bi bi-calendar-check me-1"></i>
+                Bookings
+              </NavLink>
+            </li>
+
+          </ul>
+
+          {/* Right Section */}
+          <div className="d-flex align-items-center gap-3">
+
+            {/* User */}
+            {user && (
+              <div className="d-flex align-items-center">
+                <div
+                  className="bg-primary bg-opacity-10 rounded-circle
+                             d-flex align-items-center justify-content-center
+                             me-2"
+                  style={{
+                    width: "38px",
+                    height: "38px",
+                  }}
+                >
+                  <i className="bi bi-person-fill text-primary"></i>
+                </div>
+
+                <div className="d-none d-xl-block">
+                  <small className="text-muted d-block">
+                    Welcome
+                  </small>
+
+                  <span className="fw-semibold">
+                    {user.name}
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* Logout */}
+            <button
+              className="btn btn-outline-danger btn-sm px-3"
+              onClick={handleLogout}
+            >
+              <i className="bi bi-box-arrow-right me-1"></i>
+              Logout
+            </button>
+
+          </div>
         </div>
-  </div>
-</nav>
-    </>
-  )
-}
+      </div>
+    </nav>
+  );
+};
 
-export default AdminNavbar
+export default AdminNavbar;

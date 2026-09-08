@@ -1,9 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import usersData from "../data/users";
 
 export const AuthContext = createContext();
 
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
 const AuthProvider = ({ children }) => {
+
   const [users, setUsers] = useState(() => {
     const savedUsers = localStorage.getItem("users");
 

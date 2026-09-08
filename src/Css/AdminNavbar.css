@@ -1,0 +1,38 @@
+.navbar {
+  min-height: 70px;
+}
+
+.navbar-brand {
+  text-decoration: none;
+}
+
+.navbar .nav-link {
+  transition: 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+  color: #0d6efd !important;
+}
+
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
+@media (max-width: 991px) {
+  .navbar-nav {
+    margin-top: 15px;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 10px 0 !important;
+  }
+
+  .d-flex.align-items-center.gap-3 {
+    margin-top: 15px;
+    padding-bottom: 10px;
+  }
+}
