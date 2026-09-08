@@ -162,7 +162,7 @@ const car= cars.find((car)=>car.id===Number(id))
                     <small className="text-muted d-block">
                       Fuel
                     </small>
-                    <strong>{car.fuel}</strong>
+                    <strong>{car.fuelType}</strong>
                   </div>
                 </div>
 

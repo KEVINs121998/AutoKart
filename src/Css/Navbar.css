@@ -309,3 +309,35 @@
     display: none;
   }
 }
+/* =========================
+   REGISTER BUTTON
+========================= */
+
+.register-btn {
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  background: blue;
+  color: white;
+  border: 2px solid blue;
+
+  padding: 7px 18px;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: all 0.25s ease;
+}
+
+.register-btn:hover {
+  color: white;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 18px rgba(40, 43, 211, 0.3);
+}
