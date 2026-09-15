@@ -101,6 +101,22 @@ const AdminNavbar = () => {
 
             <li className="nav-item">
               <NavLink
+                to="/admin/manage-sell"
+                className={({ isActive }) =>
+                  `nav-link px-3 ${
+                    isActive
+                      ? "text-primary fw-semibold"
+                      : "text-dark"
+                  }`
+                }
+              >
+                <i className="bi bi-people me-1"></i>
+                Sell Requests
+              </NavLink>
+            </li>
+
+            <li className="nav-item">
+              <NavLink
                 to="/admin/manage-enquiries"
                 className={({ isActive }) =>
                   `nav-link px-3 ${

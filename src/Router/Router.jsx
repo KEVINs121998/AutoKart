@@ -18,6 +18,8 @@ import ManageCars from "../Pages/Admin/ManageCars";
 import ManageBookings from "../Pages/Admin/ManageBookings";
 import ManageEnquiries from "../Pages/Admin/ManageEnquiries";
 import ManageUsers from "../Pages/Admin/ManageUsers";
+import SellCar from "../Pages/SellCar";
+import ManageSellRequests from "../Pages/Admin/ManageSellReuests";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,7 @@ const router = createBrowserRouter([
       { path: "emi", element: <Emi /> },
       { path: "contact", element: <Contact /> },
       { path: "payment", element: <Payment /> },
+            { path: "sell", element: <SellCar /> },
       {
         path: "inventory",
         element: (
@@ -85,6 +88,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute role="admin">
             <ManageBookings />
+          </ProtectedRoute>
+        ),
+      },
+        {
+        path: "manage-sell",
+        element: (
+          <ProtectedRoute role="admin">
+            <ManageSellRequests />
           </ProtectedRoute>
         ),
       },

@@ -84,6 +84,17 @@ const handleLogout = () => {
               </NavLink>
             </li>
 
+             <li className="nav-item">
+              <NavLink
+                to="/sell"
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "active" : ""}`
+                }
+              >
+                Sell Car
+              </NavLink>
+            </li>
+
             <li className="nav-item">
               <NavLink
                 to="/contact"

@@ -3,10 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const InventoryContext = createContext();
 
 export const InventoryProvider = ({ children }) => {
-  const [inventory, setInventory] = useState(() => {
-    const savedInventory = localStorage.getItem("inventory");
-    return savedInventory ? JSON.parse(savedInventory) : [];
-  });
+const [inventory, setInventory] = useState([]);
 
   // Save inventory whenever it changes
   useEffect(() => {
@@ -37,9 +34,10 @@ export const InventoryProvider = ({ children }) => {
   return (
     <InventoryContext.Provider
       value={{
-        inventory,
-        addToInventory,
-        removeFromInventory,
+ inventory,
+    setInventory,
+    addToInventory,
+    removeFromInventory,
       }}
     >
       {children}

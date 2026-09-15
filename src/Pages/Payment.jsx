@@ -1,18 +1,57 @@
 import { useInventory } from "../Context/InventoryContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Payment = () => {
-  const { inventory } = useInventory();
+ const { inventory, setInventory } = useInventory();
+  const navigate = useNavigate();
 
   const totalAmount = inventory.reduce(
     (total, car) => total + car.price,
     0
   );
+const handlePayment = () => {
+  const today = new Date().toISOString().split("T")[0];
+
+  // Get currently logged-in user
+  const loggedInUser = JSON.parse(
+    localStorage.getItem("loggedInUser")
+  );
+
+  // Get existing bookings
+  const existingBookings =
+    JSON.parse(localStorage.getItem("bookings")) || [];
+
+  // Create booking using actual user details
+  const newBookings = inventory.map((car) => ({
+    id: Date.now() + car.id,
+    customerName: loggedInUser.name,
+    email: loggedInUser.email,
+    phone: loggedInUser.pno,
+    carName: car.name,
+    bookingDate: today,
+    amount: car.price,
+    createdAt: today,
+  }));
+
+  // Save booking
+  localStorage.setItem(
+    "bookings",
+    JSON.stringify([
+      ...existingBookings,
+      ...newBookings,
+    ])
+  );
+
+  // Empty inventory
+  setInventory([]);
+
+  // Go home
+  navigate("/");
+};
 
   if (inventory.length === 0) {
     return (
       <div className="container text-center py-5">
-
         <h2 className="fw-bold">
           No Cars Selected
         </h2>
@@ -24,7 +63,6 @@ const Payment = () => {
         <Link to="/cars" className="btn btn-primary">
           Browse Cars
         </Link>
-
       </div>
     );
   }
@@ -44,7 +82,6 @@ const Payment = () => {
                 Payment
               </h2>
 
-              {/* Selected Cars */}
               <h5 className="fw-bold mb-3">
                 Selected Cars
               </h5>
@@ -54,7 +91,6 @@ const Payment = () => {
                   key={car.id}
                   className="d-flex justify-content-between border-bottom py-3"
                 >
-
                   <div>
                     <strong>{car.name}</strong>
 
@@ -64,13 +100,11 @@ const Payment = () => {
                   </div>
 
                   <strong>
-                    ₹{car.price.toLocaleString()}
+                    ₹{car.price.toLocaleString("en-IN")}
                   </strong>
-
                 </div>
               ))}
 
-              {/* Total */}
               <div className="d-flex justify-content-between mt-4">
 
                 <h5 className="fw-bold">
@@ -78,14 +112,13 @@ const Payment = () => {
                 </h5>
 
                 <h4 className="fw-bold text-primary">
-                  ₹{totalAmount.toLocaleString()}
+                  ₹{totalAmount.toLocaleString("en-IN")}
                 </h4>
 
               </div>
 
               <hr />
 
-              {/* Payment Form */}
               <h5 className="fw-bold mb-3">
                 Payment Details
               </h5>
@@ -130,8 +163,11 @@ const Payment = () => {
 
               </div>
 
-              <button className="btn btn-success btn-lg w-100 mt-2">
-                Pay ₹{totalAmount.toLocaleString()}
+              <button
+                className="btn btn-success btn-lg w-100 mt-2"
+                onClick={handlePayment}
+              >
+                Pay ₹{totalAmount.toLocaleString("en-IN")}
               </button>
 
             </div>

@@ -197,6 +197,11 @@ const ManageEnquiries = () => {
                           <small className="text-muted">
                             {enquiry.email}
                           </small>
+                          <br />  
+                          
+                             <small className="text-muted">
+                          {enquiry.phone}
+                        </small>
                         </div>
 
                       </td>

@@ -5,7 +5,6 @@ const ManageUsers = () => {
   const {
     users,
     deleteUser,
-    changeUserRole,
   } = useContext(AuthContext);
 
   const [search, setSearch] = useState("");
@@ -40,28 +39,6 @@ const ManageUsers = () => {
     if (!confirmDelete) return;
 
     deleteUser(id);
-  };
-
-  // Change role
-  const handleRoleChange = (id) => {
-    const selectedUser = users.find(
-      (user) => user.id === id
-    );
-
-    if (!selectedUser) return;
-
-    const newRole =
-      selectedUser.role === "admin"
-        ? "user"
-        : "admin";
-
-    const confirmChange = window.confirm(
-      `Change ${selectedUser.name}'s role to ${newRole}?`
-    );
-
-    if (!confirmChange) return;
-
-    changeUserRole(id);
   };
 
   return (
@@ -215,15 +192,6 @@ const ManageUsers = () => {
                       <td>
 
                         <div className="d-flex justify-content-center gap-2">
-
-                          <button
-                            className="btn btn-sm btn-outline-warning"
-                            onClick={() =>
-                              handleRoleChange(user.id)
-                            }
-                          >
-                            Change Role
-                          </button>
 
                           {user.role !== "admin" && (
 

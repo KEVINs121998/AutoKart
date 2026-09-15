@@ -1,35 +1,57 @@
 import { useState } from "react";
-import bookingsData from "../../data/bookings";
 
 const ManageBookings = () => {
-  const [bookings, setBookings] = useState(bookingsData);
+const today = new Date().toISOString().split("T")[0];
+
+const [bookings, setBookings] = useState(() => {
+  const savedBookings =
+    JSON.parse(localStorage.getItem("bookings")) || [];
+
+  return savedBookings.filter(
+    (booking) => booking.bookingDate >= today
+  );
+});
+
   const [search, setSearch] = useState("");
   const [selectedBooking, setSelectedBooking] = useState(null);
 
-  const filteredBookings = bookings.filter(
-    (booking) =>
-      booking.customerName
-        .toLowerCase()
-        .includes(search.toLowerCase()) ||
-      booking.email
-        .toLowerCase()
-        .includes(search.toLowerCase()) ||
-      booking.carName
-        .toLowerCase()
-        .includes(search.toLowerCase())
-  );
+const filteredBookings = bookings.filter(
+  (booking) =>
+    booking.customerName
+      .toLowerCase()
+      .includes(search.toLowerCase()) ||
+    booking.email
+      .toLowerCase()
+      .includes(search.toLowerCase()) ||
+    booking.carName
+      .toLowerCase()
+      .includes(search.toLowerCase()) ||
+    booking.phone
+      .toString()
+      .includes(search)
+);
 
   const formatPrice = (price) => {
     return `₹${price.toLocaleString("en-IN")}`;
   };
 
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this booking?")) {
-      setBookings((prev) =>
-        prev.filter((booking) => booking.id !== id)
+const handleDelete = (id) => {
+  if (window.confirm("Are you sure you want to delete this booking?")) {
+
+    setBookings((prev) => {
+      const updatedBookings = prev.filter(
+        (booking) => booking.id !== id
       );
-    }
-  };
+
+      localStorage.setItem(
+        "bookings",
+        JSON.stringify(updatedBookings)
+      );
+
+      return updatedBookings;
+    });
+  }
+};
 
   return (
     <div className="container-fluid py-4">
