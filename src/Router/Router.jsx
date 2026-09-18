@@ -35,7 +35,14 @@ const router = createBrowserRouter([
       { path: "emi", element: <Emi /> },
       { path: "contact", element: <Contact /> },
       { path: "payment", element: <Payment /> },
-            { path: "sell", element: <SellCar /> },
+           {
+        path: "sell",
+        element: (
+          <ProtectedRoute role="user">
+            <SellCar />
+          </ProtectedRoute>
+        ),
+      },
       {
         path: "inventory",
         element: (

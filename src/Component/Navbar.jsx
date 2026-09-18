@@ -84,7 +84,7 @@ const handleLogout = () => {
               </NavLink>
             </li>
 
-             <li className="nav-item">
+             {user && (<li className="nav-item">
               <NavLink
                 to="/sell"
                 className={({ isActive }) =>
@@ -93,7 +93,7 @@ const handleLogout = () => {
               >
                 Sell Car
               </NavLink>
-            </li>
+            </li>)}
 
             <li className="nav-item">
               <NavLink
