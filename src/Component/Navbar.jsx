@@ -13,6 +13,18 @@ const handleLogout = () => {
   navigate("/login");
 };
 
+const closeNavbar = () => {
+  const navbar = document.getElementById("navbarContent");
+
+  if (navbar && navbar.classList.contains("show")) {
+    const bsCollapse = window.bootstrap.Collapse.getInstance(navbar);
+
+    if (bsCollapse) {
+      bsCollapse.hide();
+    }
+  }
+};
+
   return (
     <nav className="navbar navbar-expand-lg autokart-navbar sticky-top">
       <div className="container">
@@ -42,6 +54,7 @@ const handleLogout = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/"
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active" : ""}`
@@ -53,6 +66,7 @@ const handleLogout = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/cars"
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active" : ""}`
@@ -64,6 +78,7 @@ const handleLogout = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/services"
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active" : ""}`
@@ -75,6 +90,7 @@ const handleLogout = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/emi"
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active" : ""}`
@@ -86,6 +102,7 @@ const handleLogout = () => {
 
              {user && (<li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/sell"
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active" : ""}`
@@ -97,6 +114,7 @@ const handleLogout = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/contact"
                 className={({ isActive }) =>
                   `nav-link ${isActive ? "active" : ""}`
