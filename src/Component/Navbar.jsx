@@ -131,7 +131,7 @@ onClick={closeNavbar}
 
             {/* Inventory */}
             {user && (
-              <Link to="/inventory" className="nav-icon-btn">
+              <Link to="/inventory" onClick={closeNavbar} className="nav-icon-btn">
                 <i className="bi bi-heart"></i>
                 <span>My Inventory({inventory.length})</span>
               </Link>
@@ -169,6 +169,7 @@ onClick={closeNavbar}
                     <Link
                       className="dropdown-item"
                       to="/profile"
+                      onClick={closeNavbar}
                     >
                       <i className="bi bi-person me-2"></i>
                       My Profile
@@ -200,7 +201,11 @@ onClick={closeNavbar}
                   <li>
                     <button
                       className="dropdown-item logout-item"
-                      onClick={handleLogout}
+                      onClick={() => {
+                        handleLogout();
+                        closeNavbar();
+                      }
+                      }
                     >
                       <i className="bi bi-box-arrow-right me-2"></i>
                       Logout

@@ -197,7 +197,11 @@ onClick={closeNavbar}
             {/* Logout */}
             <button
               className="btn btn-outline-danger btn-sm px-3"
-              onClick={handleLogout}
+              onClick={() => {
+                handleLogout();
+                closeNavbar();
+              }
+              }
             >
               <i className="bi bi-box-arrow-right me-1"></i>
               Logout
