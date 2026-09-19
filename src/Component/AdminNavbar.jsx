@@ -13,7 +13,7 @@ const AdminNavbar = () => {
   };
 
   const closeNavbar = () => {
-  const navbar = document.getElementById("navbarContent");
+  const navbar = document.getElementById("adminNavbar");
 
   if (navbar) {
     const bsCollapse = window.bootstrap.Collapse.getOrCreateInstance(navbar);
