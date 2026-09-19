@@ -139,11 +139,11 @@ onClick={closeNavbar}
 
             {!user ? (
               <div className="d-flex align-items-center gap-2">
-    <Link to="/login" className="login-btn">
+    <Link to="/login" onClick={closeNavbar} className="login-btn">
       <i className="bi bi-person"></i>
       Login
     </Link>
-    <Link to="/register" className="register-btn">
+    <Link to="/register" onClick={closeNavbar} className="register-btn">
       <i className="bi bi-person-plus"></i>
       Register
     </Link>

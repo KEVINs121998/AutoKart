@@ -12,6 +12,15 @@ const AdminNavbar = () => {
     navigate("/login");
   };
 
+  const closeNavbar = () => {
+  const navbar = document.getElementById("navbarContent");
+
+  if (navbar) {
+    const bsCollapse = window.bootstrap.Collapse.getOrCreateInstance(navbar);
+    bsCollapse.hide();
+  }
+};
+
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm sticky-top">
       <div className="container-fluid px-4">
@@ -52,6 +61,7 @@ const AdminNavbar = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/admin"
                 end
                 className={({ isActive }) =>
@@ -69,6 +79,7 @@ const AdminNavbar = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/admin/manage-cars"
                 className={({ isActive }) =>
                   `nav-link px-3 ${
@@ -85,6 +96,7 @@ const AdminNavbar = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/admin/manage-users"
                 className={({ isActive }) =>
                   `nav-link px-3 ${
@@ -101,6 +113,7 @@ const AdminNavbar = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/admin/manage-sell"
                 className={({ isActive }) =>
                   `nav-link px-3 ${
@@ -117,6 +130,7 @@ const AdminNavbar = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/admin/manage-enquiries"
                 className={({ isActive }) =>
                   `nav-link px-3 ${
@@ -133,6 +147,7 @@ const AdminNavbar = () => {
 
             <li className="nav-item">
               <NavLink
+onClick={closeNavbar}
                 to="/admin/manage-bookings"
                 className={({ isActive }) =>
                   `nav-link px-3 ${
