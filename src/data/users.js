@@ -2,8 +2,8 @@ const users = [
   {
     id: 1,
     name: "Kevin Shah",
-    email: "kevinshah@gmail.com",
-    password: "goku1234",
+    email: "user@gmail.com",
+    password: "user1234",
     pno: "9898989898",
     city: "Mumbai",
     address: "Mumbai, Maharashtra",
